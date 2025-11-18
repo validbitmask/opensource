@@ -1,0 +1,5 @@
+On one terminal : 
+python server.py
+
+The other terminal : 
+python client.py

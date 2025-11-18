@@ -1,0 +1,47 @@
+Terminal 1:
+    python3 vector_server.py --n 3 --port 6000
+    
+Terminal 2:
+    python3 vector_client.py --id 1 --n 3 --host 127.0.0.1 --port 6000
+
+Terminal 3:
+    python3 vector_client.py --id 2 --n 3 --host 127.0.0.1 --port 6000
+
+
+
+
+Each process maintains a vector clock of size N.  
+For every internal event, it increments its own clock entry.  
+Before sending a message, it increments its own entry and attaches the entire vector.  
+On receiving a message, it takes element-wise max of its vector and the received vector,
+then increments its own entry.  
+This ensures all processes maintain correct causal ordering and can detect concurrency.
+
+
+
+"""
+----- HOW TO RUN -----
+
+Terminal 1:
+    python3 vector_server.py --n 3 --port 6000
+
+Expected short output:
+    Server(0) listening on 0.0.0.0:6000
+    Recv from 1 recv_vec=[1,0,0] -> server_vec=[2,0,0]
+    Recv from 2 recv_vec=[0,1,0] -> server_vec=[2,1,0]
+
+Terminal 2:
+    python3 vector_client.py --id 1 --n 3 --host 127.0.0.1 --port 6000
+
+Terminal 3:
+    python3 vector_client.py --id 2 --n 3 --host 127.0.0.1 --port 6000
+
+Expected short output:
+    [P1] internal -> [0,1,0]
+    [P1] send -> merged -> [2,2,0]
+    [P1] FINAL [3,2,0]
+
+    [P2] internal -> [0,0,1]
+    [P2] send -> merged -> [2,1,2]
+    [P2] FINAL [2,1,3]
+"""

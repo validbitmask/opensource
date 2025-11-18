@@ -1,0 +1,10 @@
+For both methods berkeley and lamport:
+1.open 3 terminals 
+
+2.python server.py 5001 in first terminal
+   python server.py 5002 in second terminal
+   python server.py 5003 in third terminal
+
+3.open 1 more terminal
+
+4, in that run python master.py 5000 5001 5002 5003

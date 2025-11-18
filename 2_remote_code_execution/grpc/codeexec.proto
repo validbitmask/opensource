@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+service CodeExec {
+  rpc Add (TwoNumbers) returns (Result);
+  rpc Sort (NumberList) returns (ListResult);
+  rpc Upper (Text) returns (Text);
+  rpc Reverse (Text) returns (Text);
+}
+
+message TwoNumbers {
+  float num1 = 1;
+  float num2 = 2;
+}
+
+message NumberList {
+  repeated float nums = 1;
+}
+
+message ListResult {
+  repeated float nums = 1;
+}
+
+message Text {
+  string value = 1;
+}
+
+message Result {
+  float value = 1;
+}

@@ -1,0 +1,8 @@
+server terminal : 
+python -m pip install flask
+python server.py
+
+
+client terminal : 
+python -m pip install requests
+python client.py

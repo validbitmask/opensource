@@ -1,0 +1,15 @@
+Commands to Run Server and Client (Ubuntu, macOS, Windows)
+
+
+1)Run the Server
+Ubuntu / mac
+python3 server.py
+Windows
+python server.py
+
+
+2)Run the Client
+Ubuntu / mac
+python3 client.py
+Windows
+python client.py

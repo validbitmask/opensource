@@ -1,0 +1,44 @@
+terminal 1
+
+python3 dist_bank.py --id 1 --port 5001 \
+    --peers http://127.0.0.1:5002,http://127.0.0.1:5003
+
+
+terminal 2
+python3 dist_bank.py --id 2 --port 5002 \
+    --peers http://127.0.0.1:5001,http://127.0.0.1:5003
+
+
+ TERMINAL 3 — Start Server 3 (Highest ID = Leader)
+python3 dist_bank.py --id 3 --port 5003 \
+    --peers http://127.0.0.1:5001,http://127.0.0.1:5002
+
+
+terminal 4: first this 
+curl -X POST http://127.0.0.1:5001/transaction \
+     -H "Content-Type: application/json" \
+     -d '{"from":"A","to":"B","amount":10,"client_txid":"tx100"}'
+
+terminal 4: then this
+curl http://127.0.0.1:5001/status
+curl http://127.0.0.1:5002/status
+curl http://127.0.0.1:5003/status
+
+alternative:
+✔ Node 1 status:
+http://127.0.0.1:5001/status
+✔ Node 2 status:
+http://127.0.0.1:5002/status
+✔ Node 3 status:
+http://127.0.0.1:5003/status
+
+
+curl -Uri "http://127.0.0.1:5001/transaction" `
+     -Method POST `
+     -Headers @{"Content-Type"="application/json"} `
+     -Body '{"from":"A","to":"B","amount":10,"client_txid":"tx100"}'
+
+
+if curl not working then
+sudo apt update 
+sudo apt install curl bs ye kar dena

@@ -1,0 +1,10 @@
+TERMINAL 1
+python node.py --pid 1
+
+TERMINAL 2
+python node.py --pid 2
+
+TERMINAL 3
+python node.py --pid 3
+
+delete the 3rd terminal and then u get the heartbeat wala output 
